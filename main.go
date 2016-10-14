@@ -1,11 +1,11 @@
 package main
 
 import (
-  "fmt"
-  "os"
-  "flag"
 	"encoding/binary"
+	"flag"
+	"fmt"
 	"github.com/nstruthers/pihex"
+	"os"
 )
 
 func main() {
@@ -13,15 +13,15 @@ func main() {
 	span := flag.Int64("s", 1000, "span")
 	flag.Parse()
 
-  if *index < 0 {
-    fmt.Printf("Starting index must be >= 0\n")
-    os.Exit(1)
-  }
+	if *index < 0 {
+		fmt.Printf("Starting index must be >= 0\n")
+		os.Exit(1)
+	}
 
-  if *span < 2 || *span % 2 == 1 {
-    fmt.Printf("Span must be >= 2, and must be even\n")
-    os.Exit(1)
-  }
+	if *span < 2 || *span%2 == 1 {
+		fmt.Printf("Span must be >= 2, and must be even\n")
+		os.Exit(1)
+	}
 
 	curByte := byte(0)
 
@@ -30,7 +30,7 @@ func main() {
 			curByte = pihex.Digit(int64(n)) << 4
 		} else {
 			curByte = curByte | pihex.Digit(int64(n))
-      binary.Write(os.Stdout, binary.LittleEndian, curByte)
+			binary.Write(os.Stdout, binary.LittleEndian, curByte)
 		}
 	}
 }
